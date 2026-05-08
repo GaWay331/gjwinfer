@@ -1,0 +1,43 @@
+# ==============================
+# C++ 项目常用 .gitignore
+# ==============================
+
+# 忽略构建输出文件夹
+build/
+
+# 忽略可执行文件
+*.exe
+*.out
+*.app
+*.o
+*.obj
+
+# 忽略调试文件
+*.log
+*.tmp
+*.dSYM/
+*.ilk
+*.pdb
+
+# 忽略编译器生成的临时文件
+*.class
+*.so
+*.dll
+*.dylib
+*.a
+*.lib
+
+# 忽略 CMake 或 Make 生成文件
+
+
+# 忽略 IDE 配置文件
+.vscode/
+.idea/
+*.code-workspace
+
+# 忽略系统文件
+.DS_Store
+Thumbs.db
+
+# 保留示例文件
+!README.md
