@@ -11,8 +11,6 @@ public:
 
     std::string name_;
 
-
-
     std::vector<char> weight_data;
 
     std::shared_ptr<Tensor> weight_tensor=nullptr;

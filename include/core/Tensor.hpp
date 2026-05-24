@@ -79,4 +79,11 @@ private:
     DataType data_type_ =DataType::kFloat32;
 };
 
+struct TensorDesc{
+    std::string name;
+    std::vector<uint32_t> shape;
+    DataType data_type;
+    DeviceType device_type;
+};
+
 }

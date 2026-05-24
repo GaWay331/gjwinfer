@@ -15,6 +15,8 @@ public:
     std::map<std::string,std::shared_ptr<RuntimeParameter>> attributes;
 
     std::map<std::string,std::shared_ptr<RuntimeAttribute>> weights;
+
+    std::vector<std::string> inputs_name;//算子所有输入的名字，包括权重与操作数
     
 
     std::map<std::string,Operand*> inputs_map;
@@ -25,8 +27,8 @@ public:
 
     std::vector<Operand*> outputs;
 
-    std::unique_ptr<ExecutionKernel> kernel=nullptr;
-
+    std::unique_ptr<ExecutionKernel> kernel=nullptr;//实际的运算层
+    
 
 };
 }

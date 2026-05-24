@@ -102,7 +102,7 @@ namespace gjwinfer{
                 }
 
             }
-            auto input_operand = std::unique_ptr<Operand>();
+            auto input_operand = std::make_unique<Operand>();
             input_operand->name = name;
             input_operand->shapes = shapes;
             input_operand->data_type = MapONNXType(type);
@@ -119,6 +119,7 @@ namespace gjwinfer{
             graph.AddOperator(runtime_op);
             //ONNX输入的转换
             for(const auto& input_name : node_proto.input()){
+                runtime_op->inputs_name.push_back(input_name);
                 if(graph.IsWeight(input_name)){
                     runtime_op->weights[input_name] = graph.GetWeight(input_name);
                     continue;
@@ -183,7 +184,7 @@ namespace gjwinfer{
                         for(float v:attr_proto.floats()){
                             vals.push_back(v);
                         }
-                        runtime_op->attributes[name] = std::make_shared<RuntimeParameterFloat>(
+                        runtime_op->attributes[name] = std::make_shared<RuntimeParameterFloatArray>(
                             std::move(vals));
                         break;
                     }
@@ -212,12 +213,18 @@ namespace gjwinfer{
                 CHECK(dim.has_dim_value());
                 output_shapes.push_back(dim.dim_value());
             }
-            auto output_operand = std::unique_ptr<Operand>();
             const std::string& name = output_proto.name();
-            output_operand->name = output_proto.name();
-            output_operand->shapes = output_shapes;
-            output_operand->data_type = MapONNXType(type);
-            graph.AddOperand(name,std::move(output_operand));
+            if(graph.HasOperand(name)){
+                graph.GetOperandPtr(name)->shapes = output_shapes;
+                graph.GetOperandPtr(name)->data_type = MapONNXType(type);
+            } 
+            else{
+                auto output_operand = std::make_unique<Operand>();
+                output_operand->name = output_proto.name();
+                output_operand->shapes = output_shapes;
+                output_operand->data_type = MapONNXType(type);
+                graph.AddOperand(name,std::move(output_operand));
+            }
         }
     }
 

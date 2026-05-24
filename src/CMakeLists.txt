@@ -1,5 +1,6 @@
 file(GLOB_RECURSE SRC_FILES
      "core/*.cpp"
+     "layer/*.cpp"
      "parser/*.cpp")
 add_library(gjwinfer SHARED ${SRC_FILES})
 

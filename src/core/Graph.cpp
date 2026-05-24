@@ -65,7 +65,7 @@ namespace gjwinfer{
             toposortops.push_back(current_op);
             for(const auto& operand:current_op->outputs){
                 for(const auto& consumer_op:operand->consumers ){
-                    op_indegree[current_op]-=1;
+                    op_indegree[consumer_op]-=1;
                     if(op_indegree[current_op]==0) queops.push(current_op);
                 }
             }

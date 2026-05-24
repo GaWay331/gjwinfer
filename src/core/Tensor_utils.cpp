@@ -61,7 +61,7 @@ namespace utils{
         Eigen::Map<const Eigen::ArrayXf> map_inputa (input_a.dataptr<float>(),input_a.size());
         Eigen::Map<const Eigen::ArrayXf> map_inputb (input_b.dataptr<float>(),input_b.size());
         Eigen::Map< Eigen::ArrayXf> map_output (output.dataptr<float>(),output.size());
-        map_output=map_inputa+map_inputb;
+        map_output=map_inputa*map_inputb;
     }
     void TensorFillZero(Tensor& input,float& value){
         Eigen::Map< Eigen::ArrayXf> map (input.dataptr<float>(),input.size());
